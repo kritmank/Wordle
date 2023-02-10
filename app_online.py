@@ -11,8 +11,6 @@ app.session_cookie_name = "PG4_session"
 # app.config("SESSION_COOKIE_NAME","PG4_session")
 app.permanent_session_lifetime = timedelta(minutes=30) # set session lifetime to 10mins 
 
-rescore=1
-
 def import_word():
     dict_req = requests.get("https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt")
     dict_array = dict_req.text.splitlines()
@@ -53,9 +51,7 @@ def begin():
     score=request.cookies.get("score_cookie")
     highscore=request.cookies.get("highscore_cookie")
 
-    if rescore==1:
-        score="0"
-    elif score==None and highscore==None:
+    if score==None and highscore==None:
         score="0"
         highscore="0" 
     elif score==None:
@@ -70,7 +66,6 @@ def begin():
 
 @app.route("/", methods=["POST"]) # map the URL "/" for a function below
 def ontheway():
-    rescore+=1
     wordleftIn=6
     query = request.form["query"]
     score=request.cookies.get("score_cookie")
