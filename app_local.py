@@ -109,10 +109,10 @@ def ontheway():
             score+=1
             if score>highscore:
                 highscore=score
-            resp=make_response(render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn="",wordleft=wordleftIn,score=score+1,highscore=highscore))
+            resp=make_response(render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn="",wordleft=wordleftIn,score=score,highscore=highscore))
             # score=request.cookies.get("score_cookie")
             resp.set_cookie("score_cookie",str(score))
-            resp.set_cookie("score_cookie",str(highscore))
+            resp.set_cookie("highscore_cookie",str(highscore))
             session.clear()
             # print("correct")
             return resp
