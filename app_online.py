@@ -87,12 +87,12 @@ def ontheway():
         elif len(query)<lenWord:
             warn=f"Your guess word is shorter than {lenWord} letters, try again."
             wordleftIn=6-len(history)
-            return render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn=warn, wordleft=str(wordleftIn), score=score, highscore=highscore)
+            return render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn=warn, wordleft=lenWord, score=score, highscore=highscore)
         
         if query not in dict_array:
             warn="Your guess words is not a meaning word!! Try again."
             wordleftIn=6-len(history)
-            return render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn=warn, wordleft=str(wordleftIn), score=score, highscore=highscore)
+            return render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn=warn, wordleft=lenWord, score=score, highscore=highscore)
         history.append(query) # can't append directly like session["history"].append(query)
         historyLen=len(history)
         session["history"] = history
@@ -100,7 +100,7 @@ def ontheway():
         # print(query)
         # print(lenWord)
         if wordleftIn<=0:
-            resp=make_response(render_template("wordle.html", current=query, word=word, history=history, lenWord=str(wordleftIn), warn="Game over, try again!", wordleft=f"{wordleftIn} -- Answer is {word} --", score=0, highscore=highscore, reset=1))
+            resp=make_response(render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn="Game over, try again!", wordleft=f"{wordleftIn} -- Answer is {word} --", score=0, highscore=highscore, reset=1))
             resp.set_cookie("score_cookie","0")
             return resp
 
@@ -108,7 +108,7 @@ def ontheway():
             score+=1
             if score>highscore:
                 highscore=score
-            resp=make_response(render_template("wordle.html", current=query, word=word, history=history, lenWord=str(wordleftIn), warn="",wordleft=wordleftIn,score=score+1,highscore=highscore))
+            resp=make_response(render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn="",wordleft=wordleftIn,score=score+1,highscore=highscore))
             # score=request.cookies.get("score_cookie")
             resp.set_cookie("score_cookie",str(score))
             resp.set_cookie("score_cookie",str(highscore))
@@ -118,7 +118,7 @@ def ontheway():
         else:
             # print("Incorrect")
             # return render_template("contact.html")
-            return render_template("wordle.html", current=query, word=word, history=history, lenWord=str(wordleftIn), warn="", wordleft=wordleftIn, score=score, highscore=highscore)
+            return render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn="", wordleft=wordleftIn, score=score, highscore=highscore)
     except Exception as e:
         print(e)
         return Response("Something went wrong to retrieve data: " + str(e), mimetype='text/plain')
