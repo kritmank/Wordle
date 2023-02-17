@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+/* body {
+  position: relative;
+} */
+
 h1{
     font-size: 20px;
  }
@@ -28,6 +32,7 @@ h1{
  }
  .margin {
      margin: 0.5em;
+     padding: auto;
  }
  .padding {
      padding: 1em;
@@ -68,12 +73,20 @@ h1{
   }
   .infobox{
     margin:20px 20px;
+    text-align: center;
   }
   .info{
     margin:20px 0px;
   }
   form{
     margin-left:10px;
+  }
+  .center {
+    top: 50%;
+    left: 50%;
+    justify-content: center;
+    text-align: center;
+    /* transform: translate(-50%, -50%); */
   }
   .smallbutton{
     margin-left: 10px;
