@@ -12,10 +12,15 @@ app.session_cookie_name = "PG4_session"
 app.permanent_session_lifetime = timedelta(minutes=30) # set session lifetime to 10mins 
 
 def import_word():
-    with open("words.txt","r") as file:
-        content=file.read()
-    dict_array=content.splitlines()
-    return dict_array
+    try:
+        dict_req = requests.get("https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt")
+        dict_array = dict_req.text.splitlines()
+        return dict_array
+    except:
+        with open("words.txt","r") as file:
+            content=file.read()
+        dict_array=content.splitlines()
+        return dict_array
 
 @app.route("/logout", methods=["GET"])
 def clear():
@@ -47,7 +52,7 @@ def begin():
         return Response("Something went wrong to retrieve data", mimetype='text/plain')
 
     lenWord=str(len(session["word"]))
-    print("Word is : ",session["word"])
+    print("------------------------------\nWord is :",session["word"])
     # print(lenWord,"letters (begin1)")
     score=request.cookies.get("score_cookie")
     highscore=request.cookies.get("highscore_cookie")
