@@ -19,12 +19,12 @@
             </div>
         </header>
         <div class="infobox">
-        <h1 class="info">Welcome to wordle game!! This word has {{ lenWord }} letters.</h1>
-        <h2 class="info">If your guess word longer than {{lenWord}} letters, your word will be cut off. If shorter, your word will not be counted.</h2>
-        <h3 class="info">Example len=5: appreciated --> appri, tree --> not counted!</h3>
-        <h2 id="warn" class="info">{{ warn }}</h2>
-        <br>
-        <h2 id="left" class="info">guess word left : {{ wordleft }}</h2>
+            <h1 class="info">Welcome to wordle game!! This word has {{ lenWord }} letters.</h1>
+            <h2 class="info">If your guess word longer than {{lenWord}} letters, your word will be cut off. If shorter, your word will not be counted.</h2>
+            <h3 class="info">Example len=5: appreciated --> appri, tree --> not counted!</h3>
+            <h2 id="warn" class="info">{{ warn }}</h2>
+            <br>
+            <h2 id="left" class="info">guess word left : {{ wordleft }}</h2>
         </div>
         <!-- <div>
 
@@ -34,7 +34,7 @@
         <!-- {{ message }}<br/> -->
         <!-- {{ current }} -->
         <!-- <div>{{ word }}</div> -->
-
+        <div class="container center">
         <div>
         {% set correct_flag = [False] %}
         {% for hist in history %}
@@ -99,5 +99,6 @@
             <input type="submit" value="Next word" class="smallbutton"></input>
         </form>
         {% endif %}
+    </div>
     </body>
 </html>
