@@ -27,78 +27,77 @@
             <h2 id="left" class="info">guess word left : {{ wordleft }}</h2>
         </div>
         <!-- <div>
-            
-            <!- {{ word }}<br/> -->
-            
-            <!-- {{ history }}<br/> -->
-            <!-- {{ message }}<br/> -->
-            <!-- {{ current }} -->
-            <!-- <div>{{ word }}</div> -->
-            <div class="container center">   
-            <div>
-            {% set correct_flag = [False] %}
-            {% for hist in history %}
-                <div class="margin">
-                {% for letter in hist %}
-                    {% if letter == word[loop.index0] %}
-                        <span class="green padding">{{ letter }}</span>
-                    {% elif word.find(letter) == -1  %}
-                        <span class="gray padding">{{ letter }}</span>
-                    {% elif word.find(letter) == -1 %}
-                        <span class="gray padding">{{ letter }}</span>
-                    {% else %}
-                        <span class="yellow padding">{{ letter }}</span>
-                    {% endif %}
-                {% endfor %}
-                </div>
-                <br/>
-                {% if hist == word %}
-                {%   set _ = correct_flag.pop() %}
-                {%   set _ = correct_flag.append(True) %}
+
+        <!- {{ word }}<br/> -->
+
+        <!-- {{ history }}<br/> -->
+        <!-- {{ message }}<br/> -->
+        <!-- {{ current }} -->
+        <div>{{ word }}</div>
+
+        <div>
+        {% set correct_flag = [False] %}
+        {% for hist in history %}
+            <div class="margin">
+            {% for letter in hist %}
+                {% if letter == word[loop.index0] %}
+                    <span class="green padding">{{ letter }}</span>
+                {% elif word.find(letter) == -1  %}
+                    <span class="gray padding">{{ letter }}</span>
+                {% elif word.find(letter) == -1 %}
+                    <span class="gray padding">{{ letter }}</span>
+                {% else %}
+                    <span class="yellow padding">{{ letter }}</span>
                 {% endif %}
             {% endfor %}
             </div>
-            {% if reset==1 %}
-            <script>
-                document.addEventListener("keydown", function(event) {
-                    if (event.code === "Enter") {
-                        window.location.href = "/resetscore";
-                    }
-                });
-                </script>
-            <div>
-            <form method="GET" action="/resetscore">
-                <input type="submit" value="Play Again!" class="smallbutton"></input>
-            </form>
-            {% elif correct_flag == [False] %}
-            <script>
-                document.addEventListener("keydown", function(event) {
-                    if (event.code === "Enter") {
-                        window.location.href = "/";
-                    }
-                });
-                </script>
-            <a name="next"> </a>
-            <form method="POST" action="/">
-                <input id="word" type="text" name="query" class="answerbox"></input>
-                <input type="submit" value="Wordle?" class="smallbutton"></input>
-            </form>
-            <form method="GET" action="/resetscore">
-                <input type="submit" value="Give up, Reset score streak!" class="largebutton"></input>
-            </form>
-        
-            {% else %}
-            <script>
-                document.addEventListener("keydown", function(event) {
-                    if (event.code === "Enter") {
-                        window.location.href = "/logout";
-                    }
-                  });
-            </script>
-            <form method="GET" action="/logout">
-                <input type="submit" value="Next word" class="smallbutton"></input>
-            </form>
+            <br/>
+            {% if hist == word %}
+            {%   set _ = correct_flag.pop() %}
+            {%   set _ = correct_flag.append(True) %}
             {% endif %}
-        </div> 
+        {% endfor %}
+        </div>
+        {% if reset==1 %}
+        <script>
+            document.addEventListener("keydown", function(event) {
+                if (event.code === "Enter") {
+                    window.location.href = "/resetscore";
+                }
+            });
+            </script>
+        <div>
+        <form method="GET" action="/resetscore">
+            <input type="submit" value="Play Again!" class="smallbutton"></input>
+        </form>
+        {% elif correct_flag == [False] %}
+        <script>
+            document.addEventListener("keydown", function(event) {
+                if (event.code === "Enter") {
+                    window.location.href = "/";
+                }
+            });
+            </script>
+        <a name="next"> </a>
+        <form method="POST" action="/">
+            <input id="word" type="text" name="query" class="answerbox"></input>
+            <input type="submit" value="Wordle?" class="smallbutton"></input>
+        </form>
+        <form method="GET" action="/resetscore">
+            <input type="submit" value="Give up, Reset score streak!" class="largebutton"></input>
+        </form>
+       
+        {% else %}
+        <script>
+            document.addEventListener("keydown", function(event) {
+                if (event.code === "Enter") {
+                    window.location.href = "/logout";
+                }
+              });
+        </script>
+        <form method="GET" action="/logout">
+            <input type="submit" value="Next word" class="smallbutton"></input>
+        </form>
+        {% endif %}
     </body>
 </html>
