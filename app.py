@@ -92,20 +92,21 @@ def ontheway():
             query=query[:lenWord]
         elif len(query)<lenWord:
             warn=f"Your guess word is shorter than {lenWord} letters, try again."
+            print("len",len(history),history)
             wordleftIn=6-len(history)
-            return render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn=warn, wordleft=lenWord, score=score, highscore=highscore)
+            return render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn=warn, wordleft=wordleftIn, score=score, highscore=highscore)
         
         if query not in dict_array:
             warn="Your guess words is not a meaning word!! Try again."
             wordleftIn=6-len(history)
-            return render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn=warn, wordleft=lenWord, score=score, highscore=highscore)
+            return render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn=warn, wordleft=wordleftIn, score=score, highscore=highscore)
         history.append(query) # can't append directly like session["history"].append(query)
         historyLen=len(history)
         session["history"] = history
         wordleftIn-=historyLen
         # print(query)
         # print(lenWord)
-        if wordleftIn<=0:
+        if wordleftIn<=0 and query!=word:
             resp=make_response(render_template("wordle.html", current=query, word=word, history=history, lenWord=lenWord, warn="Game over, try again!", wordleft=f"{wordleftIn} -- Answer is {word} --", score=0, highscore=highscore, reset=1))
             resp.set_cookie("score_cookie","0")
             return resp
