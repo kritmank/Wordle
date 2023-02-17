@@ -33,8 +33,8 @@
         <!-- {{ history }}<br/> -->
         <!-- {{ message }}<br/> -->
         <!-- {{ current }} -->
-        <div>{{ word }}</div>
-
+        <!-- <div>{{ word }}</div> -->
+        <div class="container center">
         <div>
         {% set correct_flag = [False] %}
         {% for hist in history %}
@@ -99,5 +99,6 @@
             <input type="submit" value="Next word" class="smallbutton"></input>
         </form>
         {% endif %}
+    </div>
     </body>
 </html>
