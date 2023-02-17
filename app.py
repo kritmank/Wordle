@@ -17,7 +17,7 @@ def import_word():
         dict_array = dict_req.text.splitlines()
         return dict_array
     except:
-        with open("words.txt","r") as file:
+        with open("static/words.txt","r") as file:
             content=file.read()
         dict_array=content.splitlines()
         return dict_array
