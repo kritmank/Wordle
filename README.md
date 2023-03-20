@@ -1,5 +1,5 @@
 # Wordle Game!!
-## This is a simple wordle game made using python and pygame.
+## This is a simple wordle game made using Flask python.
 Using Flask to create a web app for the game.
 Random to generate random words.
 
